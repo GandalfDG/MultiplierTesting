@@ -10,16 +10,20 @@ import java.io.IOException;
 
 public class TestGenerator {
     public static void main(String[] args) throws IOException {
-        File file = new File("out.txt");
+        File file = new File("C:\\Users\\jac5258\\Documents\\out.txt");
         FileWriter writer = new FileWriter(file);
         int upperBound = (int) java.lang.Math.pow(2, 8);
 
-        for (int i = 0; i < upperBound; i++)
+        for (int i = 0; i < upperBound; i++) {
             for (int j = 0; j < upperBound; j++) {
 
-                String inputA = Integer.toHexString(i);
-                String inputB = Integer.toHexString(j);
-                String output = Integer.toHexString(i * j);
+                String inputA = Integer.toBinaryString(i);
+                String inputB = Integer.toBinaryString(j);
+                String output = Integer.toBinaryString(i * j);
+                
+                inputA = "00000000".substring(inputA.length()) + inputA;
+                inputB = "00000000".substring(inputB.length()) + inputB;
+                output = "0000000000000000".substring(output.length()) + output;
 
                 String line = inputA + " " + inputB + " " + output;
                 try {
@@ -29,5 +33,8 @@ public class TestGenerator {
                     e.printStackTrace();
                 }
             }
+        }
+        
+        writer.close();
     }
 }
